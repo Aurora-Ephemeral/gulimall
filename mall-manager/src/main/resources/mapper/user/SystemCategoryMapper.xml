@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.spzx.manager.service.mapper.SystemCategoryMapper">
+    <sql id="columns">
+        id,name,image_url,parent_id,status,order_num,create_time,update_time,is_deleted
+    </sql>
+
+    <sql id="excelCols">
+        id,name,image_url,parent_id,status,order_num
+    </sql>
+    <select id="getListByPid" parameterType="Long" resultType="com.mall.spzx.model.entity.product.Category">
+        select <include refid="columns" /> from category where parent_id=#{pid} and is_deleted=0 order by order_num
+    </select>
+
+    <select id="countChildrenRows" parameterType="Long" resultType="int">
+        select count(id) from category where parent_id=#{pid} and is_deleted=0
+    </select>
+
+    <select id="selectByName" parameterType="String" resultType="com.mall.spzx.model.vo.product.CategoryExcelVo">
+        select <include refid="excelCols" /> from category
+                where is_deleted=0
+                <if test="name != null and name != ''">
+                    and name like concat('%',#{name},'%')
+                </if>
+    </select>
+
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into category (<include refid="excelCols" />) values
+        <foreach collection="cacheList" item="item" separator=",">
+            (
+             #{item.id},#{item.name},#{item.imageUrl},#{item.parentId},#{item.status}#{item.orderNum}
+            )
+        </foreach>
+    </insert>
+</mapper>

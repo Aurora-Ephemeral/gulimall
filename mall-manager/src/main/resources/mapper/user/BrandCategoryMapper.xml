@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.spzx.manager.service.mapper.BrandCategoryMapper">
+    <select id="selectList" parameterType="com.mall.spzx.model.dto.product.CategoryBrandDto" resultType="com.mall.spzx.model.entity.product.CategoryBrand">
+        select
+        b.name as brand_name,
+        c.name as category_name,
+        cb.brand_id,
+        cb.category_id,
+        cb.id,
+        cb.create_time,
+        cb.update_time,
+        cb.is_deleted
+        from brand b
+        left join category_brand cb on b.id = cb.brand_id
+        left join category c on c.id = cb.category_id
+        <where>
+            cb.is_deleted = 0
+            <if test="brandIds != null and brandIds != ''">
+                and cb.brand_id in
+                <foreach collection="brandIds" item="brandId" open="and (" close=")" separator=",">
+                    #{brandId}
+                </foreach>
+            </if>
+            <if test="categoryIds != null and categoryIds != '' and categoryIds.size() > 0">
+                and cb.category_id in
+                <foreach collection="categoryIds" item="categoryId" open="and (" close=")" separator=",">
+                    #{categoryId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.mall.spzx.model.entity.product.CategoryBrand" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into category_brand (brand_id, category_id) values (#{brandId}, #{categoryId})
+    </insert>
+    <update id="update" parameterType="com.mall.spzx.model.entity.product.CategoryBrand">
+        update category_brand set
+        brand_id = #{brandId},
+        category_id = #{categoryId}
+        where id = #{id}
+    </update>
+    <update  id="delete" parameterType="java.lang.Long">
+        update category_brand set is_deleted = 1 where id = #{id}
+    </update>
+    <select id="selectBrandListByCategoryId" resultType="com.mall.spzx.model.entity.product.Brand">
+        select b.* from category_brand cb
+            left join brand b on cb.brand_id = b.id
+            where cb.category_id = #{categoryId}
+            and b.is_deleted = 0
+    </select>
+</mapper>

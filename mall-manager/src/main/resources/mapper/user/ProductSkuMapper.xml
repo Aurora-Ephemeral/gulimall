@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.spzx.manager.service.mapper.ProductSkuMapper">
+    <sql id="addCols">
+        sku_code, sku_name, product_id, thumb_img, sale_price, market_price, cost_price, stock_num, sku_spec, weight, volume
+    </sql>
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO product_sku (<include refid="addCols"/>) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.skuCode},
+             #{item.skuName},
+             #{item.productId},
+             #{item.thumbImg},
+             #{item.salePrice},
+             #{item.marketPrice},
+             #{item.costPrice},
+             #{item.stockNum},
+             #{item.skuSpec},
+             #{item.weight},
+             #{item.volume}
+            )
+        </foreach>
+    </insert>
+</mapper>
