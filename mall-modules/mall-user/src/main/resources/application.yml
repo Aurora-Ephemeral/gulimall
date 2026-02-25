@@ -1,0 +1,8 @@
+server:
+  port: 8512
+
+spring:
+  application:
+    name: service-user
+  profiles:
+    active: dev

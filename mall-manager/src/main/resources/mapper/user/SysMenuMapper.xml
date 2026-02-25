@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.spzx.manager.service.mapper.SysMenuMapper">
+    <sql id="col_names">
+        id,
+        parent_id,
+        title,
+        component,
+        sort_value,
+        status,
+        create_time,
+        update_time
+    </sql>
+    <select id="selectNodes" resultType="com.mall.spzx.model.entity.system.SysMenu">
+        select
+        <include refid="col_names" />
+        from sys_menu
+        where is_deleted = 0
+        order by sort_value desc
+    </select>
+
+    <insert id="add" parameterType="com.mall.spzx.model.entity.system.SysMenu">
+        insert into sys_menu (
+            parent_id,
+            title,
+            component,
+            sort_value
+        ) values (
+            #{parentId},
+            #{title},
+            #{component},
+            #{sortValue}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.mall.spzx.model.entity.system.SysMenu">
+        update sys_menu set
+            <if test="parentId != null and parentId != ''">
+                parent_id = #{parentId},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="component != null and component != ''">
+                component = #{component},
+            </if>
+            <if test="sortValue != null and sortValue != ''">
+                sort_value = #{sortValue},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status}
+            </if>
+    </update>
+
+    <select id="countMenuByPid" resultType="int">
+        select count(id) from sys_menu
+        where parent_id = #{parentId}
+        and is_deleted = 0
+    </select>
+
+    <update id="delete">
+        update sys_menu set is_deleted = 1 where id = #{id}
+    </update>
+
+    <select id="findByRoleId" parameterType="Long" resultType="Long">
+        select menu_id from sys_role_menu
+        where role_id = #{roleId} and is_deleted = 0
+    </select>
+
+    <delete id="deleteByRoleId" parameterType="Long">
+        delete from sys_role_menu where role_id = #{roleId}
+    </delete>
+
+    <insert id="insertByRoleId" parameterType="com.mall.spzx.model.dto.system.AssginMenuDto">
+        insert into sys_role_menu
+        (role_id, menu_id, is_half)
+        values
+            <foreach collection="menuIdList" item="menuInfo" separator=",">
+                (
+                 #{roleId},
+                 #{menuInfo.menuId},
+                 #{menuInfo.isHalf}
+                )
+            </foreach>
+    </insert>
+</mapper>

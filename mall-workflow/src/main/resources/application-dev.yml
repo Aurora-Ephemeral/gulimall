@@ -1,0 +1,12 @@
+server:
+  port: 8503
+spring:
+  datasource:
+    #    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://81.70.34.103:3306/db_spzx?useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: Lx123456.
+flowable:
+  database-schema-update: false
+

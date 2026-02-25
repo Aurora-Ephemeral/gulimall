@@ -1,0 +1,27 @@
+server:
+  port: 8500
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://81.70.34.103:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+            maxAge: 3600
+      routes:
+        - id: service-product
+          uri: lb://service-product
+          predicates:
+            - Path=/api-product/**
+          filters:
+            - StripPrefix=1
