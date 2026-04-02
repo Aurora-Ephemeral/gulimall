@@ -3,3 +3,9 @@ spring:
     name: service-manager
   profiles:
     active: dev
+
+jasypt:
+  encryptor:
+    password: ${MY_SECRET_KEY}
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

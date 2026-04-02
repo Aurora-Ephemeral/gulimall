@@ -1,0 +1,26 @@
+{
+  "new_user1": {
+    "userName": "zhangsan_666",
+    "password": "password123",
+    "name": "San Zhang",
+    "phone": "13800138000",
+    "avatar": "https://example.com/avatars/zs_01.png",
+    "description": "Test User",
+    "status": 1,
+    "createTime": "2026-03-29 12:00:00",
+    "updateTime": "2026-03-29 12:00:00",
+    "isDeleted": 0
+  },
+  "new_user2": {
+    "userName": "admin",
+    "password": "password123333",
+    "name": "admin",
+    "phone": "13800138000",
+    "avatar": "https://example.com/avatars/zs_01.png",
+    "description": "Test User",
+    "status": 1,
+    "createTime": "2026-03-29 12:00:00",
+    "updateTime": "2026-03-29 12:00:00",
+    "isDeleted": 0
+  }
+}

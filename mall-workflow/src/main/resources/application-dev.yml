@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://81.70.34.103:3306/db_spzx?useSSL=false&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false
     username: root
-    password: Lx123456.
+    password: ENC(kqm2/E14AjoM3Gho+oq4QYIGgNi/c/IN)
 flowable:
   database-schema-update: false
 
