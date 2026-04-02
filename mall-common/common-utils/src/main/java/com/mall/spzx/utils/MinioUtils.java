@@ -13,7 +13,7 @@ import java.io.InputStream;
 
 
 @Component
-@Profile("test")
+@Profile("dev")
 @RequiredArgsConstructor
 public class MinioUtils {
     private final MinioClient minioClient;

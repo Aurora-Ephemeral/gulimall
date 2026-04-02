@@ -7,8 +7,8 @@
 
     <sql id="findCondition">
         <where>
-            <if test="username != null and username != ''">
-                and username like concat('%', #{username}, '%')
+            <if test="keyword != null and keyword != ''">
+                and username like concat('%', #{keyword}, '%')
             </if>
             <if test="createTimeBegin != null and createTimeBegin != ''">
                 and create_time &gt;= #{createTimeBegin}
@@ -19,7 +19,7 @@
             and is_deleted = 0
         </where>
     </sql>
-    <insert id="addUser">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
         insert into sys_user (
             username,
             password,
@@ -27,7 +27,7 @@
             phone,
             avatar,
             description,
-            status,
+            status
         ) values (
             #{userName},
             #{password},

@@ -15,12 +15,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://81.70.34.103:3306/db_spzx?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&failOverReadOnly=false
     username: root
-    password: Lx123456.
+    password: ENC(kqm2/E14AjoM3Gho+oq4QYIGgNi/c/IN)
   data:
     redis:
       host: 81.70.34.103
       port: 6379
-      password: Lx123456.
+      password: ENC(kqm2/E14AjoM3Gho+oq4QYIGgNi/c/IN)
 
 mybatis:
   config-location: classpath:/mybatis-config.xml

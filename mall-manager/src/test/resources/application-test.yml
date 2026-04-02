@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: aaaaaaa
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+
+spzx:
+  auth:
+    noAuthUrls:
+      - /admin/system/index/login
+      - /admin/system/index/captcha
+  minio:
+    endpoint: http://82.156.219.158:9000
+    accessKey: minioadmin
+    secretKey: lx123456.
+    bucketName: mall-file
